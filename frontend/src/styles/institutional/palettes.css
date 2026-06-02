@@ -1,0 +1,73 @@
+/*
+ * PALETAS — compartilhadas entre todos os estilos
+ * As mesmas 4 paletas funcionam nos dois estilos; muda apenas a aparência visual.
+ * Escopo: .ip[data-palette="…"]   /   .ip[data-theme="dark"][data-palette="…"]
+ */
+
+/* ── CLARO ── */
+.ip[data-palette="verde"] {
+  --primary:        #2E6B4B;
+  --primary-strong: #245539;
+  --on-primary:     #fff;
+  --secondary:      #CFE2D5;
+  --accent:         #A1572F;
+  --on-accent:      #fff;
+}
+.ip[data-palette="terracota"] {
+  --primary:        #A1572F;
+  --primary-strong: #7E4324;
+  --on-primary:     #fff;
+  --secondary:      #F0D6C3;
+  --accent:         #C99B2E;
+  --on-accent:      #1A1206;
+}
+.ip[data-palette="ocre"] {
+  --primary:        #8A6A18;
+  --primary-strong: #6E5410;
+  --on-primary:     #fff;
+  --secondary:      #F3E2B0;
+  --accent:         #2E6B4B;
+  --on-accent:      #fff;
+}
+.ip[data-palette="indigo"] {
+  --primary:        #2C4A7C;
+  --primary-strong: #1E3357;
+  --on-primary:     #fff;
+  --secondary:      #D8E1F1;
+  --accent:         #A1572F;
+  --on-accent:      #fff;
+}
+
+/* ── ESCURO ── */
+.ip[data-theme="dark"][data-palette="verde"] {
+  --primary:        #6FBE93;
+  --primary-strong: #86CCA6;
+  --on-primary:     #0E1B12;
+  --secondary:      #2C5A3E;
+  --accent:         #E29A6A;
+  --on-accent:      #1A1206;
+}
+.ip[data-theme="dark"][data-palette="terracota"] {
+  --primary:        #E29A6A;
+  --primary-strong: #EBAE84;
+  --on-primary:     #23130A;
+  --secondary:      #5C3420;
+  --accent:         #E0B85A;
+  --on-accent:      #1F1605;
+}
+.ip[data-theme="dark"][data-palette="ocre"] {
+  --primary:        #E6BE5E;
+  --primary-strong: #EFCE7E;
+  --on-primary:     #211904;
+  --secondary:      #5E4A12;
+  --accent:         #6FBE93;
+  --on-accent:      #0E1B12;
+}
+.ip[data-theme="dark"][data-palette="indigo"] {
+  --primary:        #88B2E4;
+  --primary-strong: #A3C5EC;
+  --on-primary:     #0B1525;
+  --secondary:      #28406A;
+  --accent:         #E29A6A;
+  --on-accent:      #1A1206;
+}
