@@ -29,6 +29,10 @@ Plataforma multi-tenant para comunidades quilombolas criarem e gerenciarem suas 
 
 ## Requisitos técnicos
 
+**Com Docker (recomendado):**
+- Docker e Docker Compose
+
+**Sem Docker:**
 - Python 3.12 ou superior
 - Node.js 20 ou superior
 - nginx instalado e disponível no `PATH`
@@ -37,9 +41,9 @@ Plataforma multi-tenant para comunidades quilombolas criarem e gerenciarem suas 
 
 ## Guia de instalação e execução
 
-A aplicação roda com **três processos simultâneos** (uvicorn, vite e nginx) e usa subdomínios locais na porta **8090**.
+A aplicação usa subdomínios locais na porta **8090**. Independente do método escolhido, configure o `/etc/hosts` primeiro.
 
-### 1. Configurar o `/etc/hosts`
+### Passo 0 — Configurar o `/etc/hosts`
 
 Adicione as entradas abaixo para que os subdomínios resolvam localmente:
 
@@ -47,11 +51,34 @@ Adicione as entradas abaixo para que os subdomínios resolvam localmente:
 127.0.0.1  quilombo.localhost
 127.0.0.1  kalunga.quilombo.localhost
 127.0.0.1  palmares.quilombo.localhost
+127.0.0.1  frechal.quilombo.localhost
 ```
 
-> Adicione uma linha por comunidade que quiser testar.
+---
 
-### 2. Back-end (FastAPI + uvicorn)
+### Opção A — Docker (recomendado)
+
+Com Docker instalado, um único comando sobe todos os serviços:
+
+```bash
+docker compose up --build
+```
+
+O banco é populado automaticamente com dados de demo na primeira inicialização.
+
+**Parar:**
+
+```bash
+docker compose down
+```
+
+---
+
+### Opção B — Execução manual
+
+A aplicação roda com **três processos simultâneos** (uvicorn, vite e nginx).
+
+#### 1. Back-end (FastAPI + uvicorn)
 
 ```bash
 cd backend
@@ -59,14 +86,11 @@ python -m venv .venv
 source .venv/bin/activate          # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
 
-# Popula o banco com dados de exemplo
-python seed.py
-
-# Sobe a API na porta 8000
-uvicorn main:app --reload
+python seed.py                     # popula o banco com dados de exemplo
+uvicorn main:app --reload          # sobe a API na porta 8000
 ```
 
-### 3. Front-end (Vite)
+#### 2. Front-end (Vite)
 
 Em outro terminal:
 
@@ -76,7 +100,7 @@ npm install
 npm run dev                        # sobe na porta 5173
 ```
 
-### 4. Proxy reverso (nginx)
+#### 3. Proxy reverso (nginx)
 
 Em outro terminal:
 
@@ -85,7 +109,15 @@ nginx -c $(pwd)/nginx.conf -t     # valida a config
 nginx -c $(pwd)/nginx.conf        # sobe na porta 8090
 ```
 
-### 5. Acessar
+**Parar o nginx:**
+
+```bash
+nginx -c $(pwd)/nginx.conf -s stop
+```
+
+---
+
+### Acessar
 
 | URL | Descrição |
 |-----|-----------|
@@ -93,13 +125,7 @@ nginx -c $(pwd)/nginx.conf        # sobe na porta 8090
 | `http://kalunga.quilombo.localhost:8090` | Página institucional da comunidade Kalunga |
 | `http://kalunga.quilombo.localhost:8090/admin` | Painel de administração |
 
-> No painel de admin, use o e-mail configurado no `seed.py` para simular o login com Google.
-
-### Parar o nginx
-
-```bash
-nginx -c $(pwd)/nginx.conf -s stop
-```
+> No painel de admin, use o e-mail `admin.kalunga@example.com` (ou o e-mail definido no `seed.py`) para simular o login com Google.
 
 ---
 
@@ -127,7 +153,9 @@ nginx -c $(pwd)/nginx.conf -s stop
 │   │   │   └── admin/           # painel de administração
 │   │   └── styles/              # temas institucionais (CSS)
 │   └── vite.config.js
-├── nginx.conf           # proxy reverso (porta 8090)
+├── nginx.conf           # proxy reverso — execução manual
+├── nginx.docker.conf    # proxy reverso — docker compose
+├── docker-compose.yml
 ├── LICENSE
 └── README.md
 ```
