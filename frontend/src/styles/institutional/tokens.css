@@ -1,0 +1,138 @@
+/*
+ * TOKENS COMPARTILHADOS — ambos os estilos
+ * Escopo: .ip (institutional page wrapper)
+ */
+
+.ip {
+  /* escala de espaço */
+  --s1: 4px;  --s2: 8px;  --s3: 12px; --s4: 16px;
+  --s5: 24px; --s6: 32px; --s7: 48px; --s8: 64px; --s9: 96px;
+
+  /* tipografia — invariante por estilo */
+  --fd: "Fraunces", Georgia, serif;
+  --fb: "Atkinson Hyperlegible", system-ui, sans-serif;
+  --maxw: 1200px;
+
+  /* easing */
+  --ease: cubic-bezier(.2, .7, .2, 1);
+  --dur: .55s;
+
+  /* base neutra (tema claro) */
+  --bg-base:    #F2EAD3;
+  --bg-subtle:  #E8DFC8;
+  --surface:    #FAF4E6;
+  --surface-2:  #FFFFFF;
+  --border:     #D4C4A8;
+  --border-strong: #7C6D45;
+  --text:       #211E16;
+  --text-muted: #524935;
+  --text-subtle:#655A41;
+  --focus:      #1A6CA8;
+
+  /* sombras (claro) */
+  --shadow:    0 14px 34px -18px rgba(58,46,28,.45);
+  --shadow-sm: 0 6px 18px -10px rgba(58,46,28,.4);
+}
+
+/* ── MODO ESCURO ── */
+.ip[data-theme="dark"] {
+  --bg-base:    #15140E;
+  --bg-subtle:  #1D1B14;
+  --surface:    #221F17;
+  --surface-2:  #2A2619;
+  --border:     #3A352A;
+  --border-strong: #7E745A;
+  --text:       #F2ECDF;
+  --text-muted: #C2B8A4;
+  --text-subtle:#9A8F79;
+  --focus:      #6CB6E8;
+  --shadow:    0 16px 40px -18px rgba(0,0,0,.7);
+  --shadow-sm: 0 8px 22px -12px rgba(0,0,0,.65);
+  color-scheme: dark;
+}
+
+/* ── RESET MÍNIMO dentro do wrapper ── */
+.ip *, .ip *::before, .ip *::after { box-sizing: border-box; }
+.ip { overflow-x: hidden; }
+.ip img, .ip svg { display: block; max-width: 100%; }
+.ip figure { margin: 0; }
+.ip h1, .ip h2, .ip h3 {
+  font-family: var(--fd);
+  font-weight: 600;
+  line-height: 1.06;
+  letter-spacing: -.015em;
+  margin: 0;
+}
+.ip a { color: var(--primary-strong); }
+.ip .wrap {
+  width: 100%;
+  max-width: var(--maxw);
+  margin-inline: auto;
+  padding-inline: clamp(18px, 5vw, 40px);
+}
+.ip section.blk {
+  padding-block: clamp(64px, 9vw, 108px);
+  position: relative;
+  background: var(--bg-base);
+}
+.ip section.alt {
+  background: color-mix(in srgb, var(--secondary) 38%, var(--bg-base));
+}
+
+/* placeholder visual (sem imagem) */
+.ip .ph {
+  position: relative;
+  background: var(--secondary);
+  color: var(--primary);
+  display: grid;
+  place-items: center;
+}
+.ip .ph svg { width: 42%; max-width: 120px; stroke-width: 1.4; opacity: .9; }
+
+/* cabeçalho de seção */
+.ip .kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  font-weight: 700;
+  font-size: .78rem;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: var(--s4);
+}
+.ip .head { max-width: 24ch; margin-bottom: var(--s7); }
+.ip .head.center { margin-inline: auto; text-align: center; }
+.ip .head.center .kicker { justify-content: center; }
+.ip .head h2 { font-size: clamp(2rem, 5vw, 3.1rem); }
+.ip .head h2 em { font-style: italic; color: var(--primary); }
+.ip .head .sub {
+  font-family: var(--fb);
+  font-size: 1.2rem;
+  color: var(--text-muted);
+  margin-top: var(--s4);
+  max-width: 52ch;
+  letter-spacing: 0;
+}
+
+.ip .sr-only {
+  position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0;
+  overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+}
+
+/* revelar no scroll */
+.ip .rv { opacity: 0; transform: translateY(26px); transition: opacity .7s var(--ease), transform .7s var(--ease); }
+.ip .rv.in { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  .ip .rv { opacity: 1; transform: none; }
+}
+
+/* imagens reais dentro de containers de seção */
+.ip .arch > img,
+.ip .frame > img,
+.ip .hero-art > .arch > img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+/* transição suave ao trocar paleta/tema */
+.ip *, .ip *::before, .ip *::after {
+  transition: background-color .4s var(--ease), border-color .4s var(--ease), color .4s var(--ease);
+}
