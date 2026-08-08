@@ -2,11 +2,13 @@
 
 > **Atenção:** Este repositório contém um **MVP de demonstração**, não a versão definitiva do produto.
 >
-> O projeto foi originalmente concebido com **Java + Spring Boot** no back-end e **Next.js** no front-end. Os repositórios da versão final, ainda em desenvolvimento, são:
-> - Back-end: [ArrudaFreitas/quilombo-backend](https://github.com/ArrudaFreitas/quilombo-backend)
-> - Front-end: [ArrudaFreitas/quilombo-frontend](https://github.com/ArrudaFreitas/quilombo-frontend)
+> A versão definitiva foi construída com **Java 21 + Spring Boot** no back-end e **Next.js** no front-end, e vive em um único repositório:
 >
-> Este MVP foi construído previamente como **molde do resultado esperado**. Por falta de tempo para concluir a migração para a stack definitiva, ele está sendo disponibilizado para a apresentação acadêmica — que retratará o processo de desenvolvimento do Quilombo como produto final, usando este MVP para a demonstração de funcionalidades.
+> ### 👉 [ArrudaFreitas/Quilombo](https://github.com/ArrudaFreitas/Quilombo)
+>
+> Ela está funcional de ponta a ponta, com multi-tenancy por subdomínio, Row Level Security no PostgreSQL, autenticação OAuth2 e área administrativa completa.
+>
+> Este MVP foi construído previamente como **molde do resultado esperado** e serviu à apresentação acadêmica, que retratou o processo de desenvolvimento do Quilombo como produto final, usando este MVP para a demonstração de funcionalidades.
 
 ---
 
